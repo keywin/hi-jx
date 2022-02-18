@@ -4,7 +4,7 @@
       <div>账号: <input type="text" v-model="username"></div>
       <div>密码: <input type="text" v-model="pwd"><button @click="login()">登录</button></div>
     </div>
-    <div class="listFoo">
+    <div class="listFoo" style="overflow-y: auto;">
       <div class="list" v-for="(item, i) in msgList" :key="i">
         <div class="l" v-if="item.from !== username">
           <div class="logo">{{ item.from }}</div>
