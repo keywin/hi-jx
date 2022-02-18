@@ -1,3 +1,12 @@
+import config from "./WebIMConfig";
+import websdk from "easemob-websdk";
+
+import store from '@/store/index.js'
+
+// 初始化IM SDK
+var WebIM = {};
+WebIM = window.WebIM = websdk;
+
 //初始化IM SDK
 WebIM.config = config;
 WebIM.conn = new WebIM.connection({
@@ -33,13 +42,22 @@ window.onload = function () {
 //注册IM 回调
 WebIM.conn.listen({
     onOpened: function (message) {          //连接成功回调
-        console.log("%c [opened] 连接已成功建立", "color: green", newDate);
+        console.log("%c [opened] 连接已成功建立", "color: green", newDate, message);
     },
     onClosed: function (message) {
-        console.log("退出登陆", newDate);
+        console.log("退出登陆", newDate, message);
     },         //连接关闭回调
     onTextMessage: function (message) {
-        console.log('onTextMessage: ', message);
+        console.log('onTextMessage: ', message, 111111111111111111);
+        store.commit('SET_MSGLIST', {
+            chatType: message.type,
+            type: message.contentsType,
+            mid: message.id, // 消息id
+            msg: message.data, // 消息文本
+            time: message.time, // 发送时间
+            from: message.from, // 发送人id
+            to: message.to, // 接受者id
+        })
         //判断是否有扩展字段，会议ID是否为空，如果有会议ID 就加入会议
     },    //收到文本消息
     onEmojiMessage: function (message) {
@@ -63,7 +81,7 @@ WebIM.conn.listen({
                 console.log('>>>', response)
                 // let objectUrl = WebIM.default.utils.parseDownloadResponse.call(WebIM.conn, response);
                 var audio = document.createel;
-                var audio = document.createElement('audio');
+                // var audio = document.createElement('audio');
                 document.body.appendChild(audio);
                 audio.src = options.url;
                 audio.controls = true
@@ -93,14 +111,14 @@ WebIM.conn.listen({
                 'Accept': 'audio/mp4'
             },
             onFileDownloadComplete: function (response) {
-                var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
+                var objectURL = WebIM.utils.parseDownloadResponse.call(WebIM.conn, response);
                 node.src = objectURL;
             },
             onFileDownloadError: function () {
                 console.log('File down load error.')
             }
         };
-        WebIM.utils.download.call(conn, option);
+        WebIM.utils.download.call(WebIM.conn, option);
     },   //收到视频消息
     onPresence: function (message) {
         var myDate = new Date().toLocaleString();
@@ -142,36 +160,36 @@ WebIM.conn.listen({
                 break;
 
             case "joinGroupNotifications":  //收到申请加群通知
-                var groupNotifications = window.confirm((message.from + "申请加入群组: " + message, groupid));
+                var groupNotifications = window.confirm((message.from + "申请加入群组: " + message.groupid));
                 if (groupNotifications) {
                     // 同意申请
                     var options = {
                         applicant: message.from,                          // 申请加群的用户名
-                        groupId: message, groupid,                              // 群组ID
+                        groupId: message.groupid,                              // 群组ID
                         success: function (res) {
                             console.log('同意进群', res);
                         }
                     };
                     WebIM.conn.agreeJoinGroup(options);
                 } else {
-                    // 拒绝申请
-                    var options = {
-                        applicant: message.from,                // 申请加群的用户名
-                        groupId: message, groupid,                    // 群组ID
-                        success: function (res) {
-                            console.log('同意进群', res);
-                        }
-                    };
-                    WebIM.conn.rejectJoinGroup(options);
+                    // // 拒绝申请
+                    // var options = {
+                    //     applicant: message.from,                // 申请加群的用户名
+                    //     groupId: message.groupid,                    // 群组ID
+                    //     success: function (res) {
+                    //         console.log('同意进群', res);
+                    //     }
+                    // };
+                    // WebIM.conn.rejectJoinGroup(options);
                 }
                 break;
             case "direct_joined":
                 console.log('收到群组邀请', message)
                 break;
             case 'createGroupACK':
-                conn.createGroupAsync({
+                WebIM.conn.createGroupAsync({
                     from: message.from,
-                    success: function (option) {
+                    success: function () {
                         console.log('Create Group Succeed');
                     }
                 });
@@ -186,7 +204,7 @@ WebIM.conn.listen({
             }
         }
     },         //处理好友申请
-    onInviteMessage: function (message) {
+    onInviteMessage: function () {
         console.log('Invite');
     },  //处理群组邀请
     onOnline: function () {
@@ -219,3 +237,5 @@ WebIM.conn.listen({
         console.log('onMutedMessage: ', message);
     }         //如果用户在A群组被禁言，在A群发消息会走这个回调并且消息不会传递给群其它成员
 });
+
+export default WebIM;
