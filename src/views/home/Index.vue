@@ -41,35 +41,12 @@ export default {
     this.treeClick(this.treeData[0])
   },
   mounted () {
-    // console.log(require(`https://hi-jx.vercel.app/md/a.md`))
-    // axios({ method:'get', url:'https://hi-jx.vercel.app/md/a.md'}).then(res => {
-    // axios({ method:'get', url:'../../../md/a.md'}).then(res => {
-    //   console.log(res.data)
-    //   // const md = new MarkdownIt()
-    //   this.context = res.data
-    //   this.$hljs.highlightCode()
-    // })
-    // iframe.load(function () {undefined
 
-    //   var cssLink = document.createElement("link");
-
-    //   cssLink.href = "style.css";
-
-    //   cssLink.rel = "stylesheet";
-
-    //   cssLink.type = "text/css";
-
-    //   frames['iframe'].document.body.appendChild(cssLink);
-
-    // });
-    // setTimeout(() => {
-    //   this.a = 'active'
-    // }, 3000)
   },
   methods: {
     getData(title) {
-      axios({ method:'get', url: `../../../md/${title}`}).then(res => {
-      // axios({ method:'get', url: `https://hi-jx.vercel.app/md/${title}` + title}).then(res => {
+      // axios({ method:'get', url: `../../../md/${title}`}).then(res => {
+      axios({ method:'get', url: `https://hi-jx.vercel.app/md/${title}` + title}).then(res => {
         console.log(res.data)
         this.context = res.data
         this.$hljs.highlightCode()
@@ -117,6 +94,9 @@ export default {
     .markdown-body{
       height: 100%;
       box-shadow: none !important;
+    }
+    /deep/ .scroll-style{
+      background: #fff !important;
     }
   }
 }
