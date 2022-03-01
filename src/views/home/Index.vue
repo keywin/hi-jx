@@ -32,12 +32,14 @@ export default {
     return {
       context: '',
       treeData: [
-        { title: '01 http 和 https.md', id: 1646117485649 }
+        { title: '01 http 和 https.md', id: 1646117485649 },
+        { title: '02 本地存储', id: 1646125731162 },
       ],
       active: ''
     }
   },
   created () {
+    sessionStorage.getItem('kaishi')
     this.treeClick(this.treeData[0])
   },
   mounted () {
@@ -72,14 +74,15 @@ export default {
     height: 100%;
     ul{
       flex: 1;
-      padding: 0 12px;
+      padding: 5px 12px 0;
       overflow-y: auto;
       li{
         display: flex;
         align-items: center;
-        height: 42px;
+        height: 38px;
         font-size: 14px;
         color: #c5c9d6;
+        cursor: pointer;
       }
       li.active{
         color: #464d6b;
