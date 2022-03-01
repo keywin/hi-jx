@@ -5,12 +5,14 @@ import router from '@/router/index'
 import store from '@/store/index.js'
 
 import mavonEditor from 'mavon-editor'
+import '@/assets/styles/github-markdown.min.css'
+// import '@/assets/styles/katex.min.css'
 // import 'mavon-editor/dist/css/index.css'
 // use
 Vue.use(mavonEditor)
 
-import 'highlight.js/styles/googlecode.css'
 import hljs from 'highlight.js'
+// import 'highlight.js/styles/atom-one-dark.css'
 hljs.highlightCode = function () { 
 	//自定义highlightCode方法，将只执行一次的逻辑去掉
 	let blocks = document.querySelectorAll('pre code');
