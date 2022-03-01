@@ -28,5 +28,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.Layout{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 </style>

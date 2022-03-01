@@ -43,8 +43,9 @@ export default {
 .Header{
   display: flex;
   align-items: center;
-  height: 80px;
-  border-bottom: 1px solid #e8e8e8;
+  height: 64px;
+  // border-bottom: 1px solid #e8e8e8;
+  border-bottom: 3px solid #f6f7fc;
   .l{
     flex: 1;
     display: flex;
