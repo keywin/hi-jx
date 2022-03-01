@@ -33,7 +33,7 @@ export default {
       context: '',
       treeData: [
         { title: '01 http 和 https.md', id: 1646117485649 },
-        { title: '02 本地存储', id: 1646125731162 },
+        { title: '02 本地存储.md', id: 1646125731162 },
       ],
       active: ''
     }
