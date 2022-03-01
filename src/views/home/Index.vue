@@ -46,7 +46,7 @@ export default {
   methods: {
     getData(title) {
       // axios({ method:'get', url: `../../../md/${title}`}).then(res => {
-      axios({ method:'get', url: `https://hi-jx.vercel.app/md/${title}` + title}).then(res => {
+      axios({ method:'get', url: `https://hi-jx.vercel.app/md/${title}`}).then(res => {
         console.log(res.data)
         this.context = res.data
         this.$hljs.highlightCode()
