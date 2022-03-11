@@ -11,6 +11,7 @@
     "axios": "^0.26.0",
     "copy-webpack-plugin": "4.0.1",
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.8",
     "easemob-websdk": "^4.0.3",
     "highlight.js": "^11.4.0",
     "less": "^3.12.2",

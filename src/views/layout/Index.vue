@@ -1,36 +1,42 @@
 <template>
   <div class="Layout">
-    <Header></Header>
+    <Nav @showDrawer="showDrawer"></Nav>
     <router-view></router-view>
+    <Drawer :isShowDrawer="isShowDrawer"></Drawer>
   </div>
 </template>
 
 <script>
-import Header from '@/views/layout/Header.vue'
+import Nav from '@/views/layout/Nav.vue'
+import Drawer from '@/views/layout/Drawer.vue'
 export default {
   name: 'Layout',
   components: {
-    Header
+    Nav,
+    Drawer
   },
   props: {
 
   },
   data() {
     return {
-      
+      isShowDrawer: false
     }
   },
   mounted () {
 
   },
-  methods: {},
+  methods: {
+    showDrawer() {
+      this.isShowDrawer = !this.isShowDrawer
+    }
+  },
 }
 </script>
 
 <style lang="less" scoped>
 .Layout{
   display: flex;
-  flex-direction: column;
   height: 100vh;
 }
 </style>

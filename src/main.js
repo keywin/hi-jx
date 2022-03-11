@@ -6,20 +6,22 @@ import store from '@/store/index.js'
 
 import mavonEditor from 'mavon-editor'
 import '@/assets/styles/github-markdown.min.css'
-// import '@/assets/styles/katex.min.css'
-// import 'mavon-editor/dist/css/index.css'
-// use
+
+import dayjs from 'dayjs'
+
+import Header from '@/components/Header.vue';
+
 Vue.use(mavonEditor)
 
 import hljs from 'highlight.js'
-// import 'highlight.js/styles/atom-one-dark.css'
 hljs.highlightCode = function () { 
-	//自定义highlightCode方法，将只执行一次的逻辑去掉
 	let blocks = document.querySelectorAll('pre code');
 	[].forEach.call(blocks, hljs.highlightBlock);
 };
 Vue.prototype.$hljs = hljs;
+Vue.prototype.$dayjs = dayjs;
 
+Vue.component('Header', Header);
 
 Vue.config.productionTip = false
 

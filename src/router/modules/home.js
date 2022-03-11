@@ -2,8 +2,7 @@ const Layout = () => import('@/views/layout/Index.vue')
 
 const Home = () => import('@/views/home/Index.vue')
 const Work = () => import('@/views/work/Index.vue')
-const Timeline = () => import('@/views/timeline/Index.vue')
-const About = () => import('@/views/about/Index.vue')
+const Link = () => import('@/views/link/Index.vue')
 
 export default [
   {
@@ -26,15 +25,10 @@ export default [
         component: Work,
       },
       {
-        path: '/timeline',
-        name: 'Timeline',
-        component: Timeline,
+        path: '/link',
+        name: 'Link',
+        component: Link,
       },
-      {
-        path: '/about',
-        name: 'About',
-        component: About,
-      }
     ]
   }
 ]
