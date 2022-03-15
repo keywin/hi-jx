@@ -28,6 +28,14 @@ const mutations = {
   SET_ISSUCCESS_LOGIN (state, isSuccessLogin) {
     state.isSuccessLogin = isSuccessLogin
   },
+  SET_LOGINOUT () {
+    this.commit('SET_MSGLIST', {})
+    this.commit('SET_USERINFO', {})
+    this.commit('SET_FRIENDLIST', [])
+    this.commit('SET_ISSHOW_LOGIN', false)
+    this.commit('isSuccessLogin', false)
+    window.location.reload()
+  }
 }
 
 const actions = {}

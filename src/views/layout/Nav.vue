@@ -1,6 +1,6 @@
 <template>
   <div class="Nav">
-    <div class="r" @click="showDrawer()">
+    <div class="r" @click="showDrawer()" @contextmenu.prevent="loginOut()">
       <img v-if="userInfo.avatarurl" :src="userInfo.avatarurl" alt="" width="48px" height="48px">
       <span v-if="!userInfo.avatarurl"></span>
     </div>
@@ -62,6 +62,9 @@ export default {
       } else {
         this.$emit('showDrawer')
       }
+    },
+    loginOut() {
+      this.$store.commit('SET_LOGINOUT')
     }
   },
 }

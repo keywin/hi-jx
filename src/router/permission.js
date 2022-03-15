@@ -4,8 +4,7 @@ import store from '../store/index.js'
 // const whiteList = ['/login', '/register']
 
 export default function () {
-  router.afterEach(async (to, from) => {
-    console.log(to, from)
+  router.afterEach(async (to) => {
     if (!store.state.auth.isSuccessLogin && to.meta.login) {
       store.commit('SET_ISSHOW_LOGIN', true)
     }

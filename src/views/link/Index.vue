@@ -2,8 +2,8 @@
   <div class="Link">
     <Header>
       <div class="jx-input">
-        <input type="text" placeholder="回车检索" v-model="formaData.nickname">
-        <img src="~@/assets/imgs/increase.png" alt="">
+        <input type="text" placeholder="回车检索, 按钮添加" v-model="searchVal">
+        <img src="~@/assets/imgs/increase.png" alt="" @click="addContact">
       </div>
       <div class="header">{{ active }}</div>
     </Header>
@@ -61,7 +61,7 @@ export default {
     return {
       active: '',
       msg: '',
-      formaData: {}
+      searchVal: ''
     }
   },
   computed: {
@@ -136,8 +136,9 @@ export default {
     },
     // 添加好友
     addContact() {
-      let message = '加个好友呗!';
-      WebIM.conn.addContact('liukaiwen', message);
+      console.log(1)
+      let message = `hi ${this.searchVal}, 加个好友呗!`
+      WebIM.conn.addContact(this.searchVal, message);
     },
     // 好友列表选中
     treeClick(item) {
