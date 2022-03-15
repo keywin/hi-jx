@@ -11,6 +11,9 @@ import dayjs from 'dayjs'
 
 import Header from '@/components/Header.vue';
 
+import VueTouch from 'vue-touch'
+Vue.use(VueTouch, {name: 'v-touch'})
+
 Vue.use(mavonEditor)
 
 import hljs from 'highlight.js'

@@ -1,5 +1,5 @@
 <template>
-  <div class="Drawer" :class="isShowDrawer && 'active'">
+  <div class="Drawer" :class="drawer">
     <div class="jx-card">
 
     </div>
@@ -37,7 +37,6 @@ export default {
   components: {
 
   },
-  props: ['isShowDrawer'],
   data() {
     return {
       formaData: {
@@ -49,9 +48,12 @@ export default {
     userInfo () {
       return this.$store.state.auth.userInfo
     },
+    drawer () {
+      return this.$store.state.auth.touchStatus.drawer ? this.$store.state.auth.touchStatus.drawer : ''
+    },
   },
   watch: {
-    isShowDrawer: {
+    drawer: {
       immediate: true,
       handler(val) {
         val && this.fetchUserInfoById()

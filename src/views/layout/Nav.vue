@@ -1,5 +1,5 @@
 <template>
-  <div class="Nav">
+  <div class="Nav" :class="$store.state.auth.touchStatus.nav ? $store.state.auth.touchStatus.nav : ''">
     <div class="r" @click="showDrawer()" @contextmenu.prevent="loginOut()">
       <img v-if="userInfo.avatarurl" :src="userInfo.avatarurl" alt="" width="48px" height="48px">
       <span v-if="!userInfo.avatarurl"></span>
@@ -32,6 +32,9 @@ export default {
     userInfo () {
       return this.$store.state.auth.userInfo
     },
+    touchStatus () {
+      return this.$store.state.auth.touchStatus
+    },
   },
   watch: {
     $route: {
@@ -60,7 +63,11 @@ export default {
       if (!this.userInfo.username) {
         this.$store.commit('SET_ISSHOW_LOGIN', true)
       } else {
-        this.$emit('showDrawer')
+        if (this.touchStatus.drawer) {
+          this.$store.commit('SET_TOUCHSTATUS', { drawer: '' })
+        } else {
+          this.$store.commit('SET_TOUCHSTATUS', { drawer: 'active' })
+        }
       }
     },
     loginOut() {
@@ -74,10 +81,14 @@ export default {
 .Nav{
   display: flex;
   flex-direction: column;
-  width: 180px;
+  width: 60px;
   height: 100vh;
   // border-bottom: 1px solid #e8e8e8;
   border-right: 1px solid #f6f7fc;
+  transition: width .3s;
+  &.active{
+    width: 180px;
+  }
   .l{
     flex: 1;
     .item{

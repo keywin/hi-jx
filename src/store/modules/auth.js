@@ -3,7 +3,8 @@ const state = {
   userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {},
   friendList: localStorage.getItem('friendList') ? JSON.parse(localStorage.getItem('friendList')) : [],
   isShowLogin: false,
-  isSuccessLogin: false // 是否成功登录
+  isSuccessLogin: false, // 是否成功登录
+  touchStatus: {}, // nav, drawer
 }
 
 const mutations = {
@@ -35,6 +36,12 @@ const mutations = {
     this.commit('SET_ISSHOW_LOGIN', false)
     this.commit('isSuccessLogin', false)
     window.location.reload()
+  },
+  SET_TOUCHSTATUS (state, touchStatus) {
+    state.touchStatus = {
+      ...state.touchStatus,
+      ...touchStatus
+    }
   }
 }
 
