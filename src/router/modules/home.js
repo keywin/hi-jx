@@ -28,6 +28,9 @@ export default [
         path: '/link',
         name: 'Link',
         component: Link,
+        meta: {
+          login: true
+        }
       },
     ]
   }

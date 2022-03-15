@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// import permission from './permission.js'
+import permission from './permission.js'
 
 import Home from './modules/home.js'
 
@@ -19,4 +19,4 @@ export default new Router({
   ]
 })
 
-// permission()
+permission()

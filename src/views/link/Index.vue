@@ -155,7 +155,7 @@ export default {
   .jx-input{
     display: flex;
     align-items: center;
-    margin-LEFT: 10px;
+    // margin-left: 10px;
     background: #f4f4f4;
     input{
       height: 32px;
@@ -201,7 +201,7 @@ export default {
     .LEFT{
       display: flex;
       flex-direction: column;
-      width: 300px;
+      width: 200px;
       height: 100%;
       background: #fbfbfb;
       ul{

@@ -1,24 +1,28 @@
 import router from '@/router/index.js'
-// import store from '../store/index.js'
+import store from '../store/index.js'
 
-const whiteList = ['/login', '/register']
+// const whiteList = ['/login', '/register']
 
-// export default function () {
-//   router.beforeEach(async (to, from, next) => {
-//     // 白名单可直接访问
-//     if (whiteList.indexOf(to.path) !== -1) {
-//       next()
-//       return
-//     }
-//     next()
-//     // try {
-//     //   if (store.state.auth.token) {
-//     //     next()
-//     //   } else {
-//     //     next('/login')
-//     //   }
-//     // } catch (e) {
-//     //   next('/login')
-//     // }
-//   })
-// }
+export default function () {
+  router.afterEach(async (to, from) => {
+    console.log(to, from)
+    if (!store.state.auth.isSuccessLogin && to.meta.login) {
+      store.commit('SET_ISSHOW_LOGIN', true)
+    }
+    // 白名单可直接访问
+    // if (whiteList.indexOf(to.path) !== -1) {
+    //   next()
+    //   return
+    // }
+    // next()
+    // try {
+    //   if (store.state.auth.token) {
+    //     next()
+    //   } else {
+    //     next('/login')
+    //   }
+    // } catch (e) {
+    //   next('/login')
+    // }
+  })
+}

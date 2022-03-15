@@ -5,14 +5,15 @@
       <span v-if="!userInfo.avatarurl"></span>
     </div>
     <div class="l">
-      <div @click="linkTo('/home')" :class="active === '/home' && 'active'" class="item">home</div>
-      <div @click="linkTo('/work')" :class="active === '/work' && 'active'" class="item">work</div>
-      <div @click="linkTo('/link')" :class="active === '/link' && 'active'" class="item">link</div>
+      <div v-for="item in listData" :key="item.path" @click="linkTo(item.path)" :class="active === item.path && 'active'" class="item">{{ item.name }}</div>
+      <!-- <div @click="linkTo('/work')" :class="active === '/work' && 'active'" class="item">work</div> -->
+      <!-- <div @click="linkTo('/link')" :class="active === '/link' && 'active'" class="item">link</div> -->
     </div>
   </div>
 </template>
 
 <script>
+import Home from '@/router/modules/home.js'
 export default {
   name: 'Nav',
   components: {
@@ -23,7 +24,8 @@ export default {
   },
   data() {
     return {
-      active: 'home'
+      active: 'home',
+      listData: []
     }
   },
   computed: {
@@ -31,15 +33,24 @@ export default {
       return this.$store.state.auth.userInfo
     },
   },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(nVal) {
+        this.active = nVal.path
+      }
+    },
+  },
   created() {
-    this.active = this.$route.path
+    // this.active = this.$route.path
+    this.listData = Home[0].children
   },
   mounted () {
 
   },
   methods: {
     linkTo(type) {
-      this.active = type
+      // this.active = type
       if (`${type}` === this.$route.path) return
       this.$router.push({
         path: `${type}`
